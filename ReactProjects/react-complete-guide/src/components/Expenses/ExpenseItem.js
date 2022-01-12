@@ -7,7 +7,7 @@ function ExpenseItem(props) {
   const [title, setTitle] = useState(props.title);
   
   const clickHandler = () => {
-    // title = 'Updated'  It wont be set like this anymore , insteasd through
+    // title = 'Updated'  It wont be set like this anymore , instead through
     // a dedicated function through useState
     setTitle('Updated');
     console.log(title);
