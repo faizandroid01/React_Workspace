@@ -5,6 +5,7 @@ const ExpenseForm = (prop) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -33,7 +34,30 @@ const ExpenseForm = (prop) => {
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
+    if (expenseFormData.title !== "") {
+      setIsEditing(false);
+    }
   };
+
+  const closeForm = () => {
+    setIsEditing(false);
+  };
+
+  const showFormClickHandler = () => {
+   // console.log("clicked New Expense");
+    setIsEditing(true);
+  };
+
+//  console.log(isEditing);
+  if (!isEditing) {
+    return (
+      <div className="new-expense__controls">
+        <button type="button" onClick={showFormClickHandler}>
+          Add New Expense
+        </button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={submitHandler}>
@@ -65,6 +89,11 @@ const ExpenseForm = (prop) => {
             max="2022-12-31"
             onChange={dateChangeHandler}
           />
+        </div>
+        <div className="new-expense__actions">
+          <button type="reset" onClick={closeForm}>
+            Cancel
+          </button>
         </div>
         <div className="new-expense__actions">
           <button type="submit">Add Expense</button>
